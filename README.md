@@ -54,7 +54,7 @@ git clone https://github.com/GuilhermeCanina/feedbacks.git
 cd feedbacks
 ```
 
-###2. Instale as Dependências
+### 2. Instale as Dependências
 
 Se você estiver configurando o backend com Node.js, vá para o diretório do projeto no terminal e instale as dependências com o seguinte comando:
 
@@ -64,7 +64,7 @@ npm install
 
 Isso vai instalar todos os pacotes necessários listados no package.json.
 
-###3. Crie o Banco de Dados
+### 3. Crie o Banco de Dados
 
 Abra o terminal MySQL e execute o seguinte comando para criar o banco de dados:
 
@@ -81,7 +81,7 @@ CREATE TABLE feedbacks(
 );
 ```
 
-###6. Executar o Backend
+### 4. Executar o Backend
 ```bash
 npm start
 ```
