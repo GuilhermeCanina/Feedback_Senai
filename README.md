@@ -2,6 +2,24 @@
 
 Este projeto é um banco de dados simples para armazenar feedbacks de usuários. Ele foi criado para registrar informações de feedbacks recebidos, incluindo dados como nome, e-mail, data e o conteúdo do feedback.
 
+## Tecnologias Usadas
+
+### Frontend:
+- **HTML**: Para estruturar as páginas.
+- **CSS**: Para estilizar o layout e tornar as páginas visualmente agradáveis.
+- **JavaScript**: Para adicionar interatividade e lógica no lado do cliente.
+
+### Backend:
+- **Node.js**: Ambiente de execução para JavaScript no lado do servidor.
+- **Express**: Framework minimalista para Node.js, utilizado para criar o servidor web e lidar com rotas.
+
+### Banco de Dados:
+- **MySQL**: Sistema de gerenciamento de banco de dados relacional usado para armazenar os feedbacks.
+
+### Ferramentas:
+- **Git**: Sistema de controle de versão utilizado para gerenciar e versionar o código.
+- **VSCode**: Editor de código-fonte recomendado para desenvolvimento, com suporte para Node.js e integração com Git.
+
 ## Estrutura do Banco de Dados
 
 O banco de dados `feedbacks` contém uma tabela chamada `feedbacks` com as seguintes colunas:
@@ -16,46 +34,59 @@ O banco de dados `feedbacks` contém uma tabela chamada `feedbacks` com as segui
 | `email`         | VARCHAR(100)    | E-mail do usuário que enviou o feedback             |
 | `feedback`      | VARCHAR(255)    | O conteúdo do feedback dado pelo usuário            |
 
-## Tecnologias Usadas
+## Requisitos
 
-Este projeto utiliza as seguintes tecnologias:
+Antes de começar, você precisa instalar as seguintes ferramentas no seu ambiente de desenvolvimento:
 
-- **MySQL**: Sistema de gerenciamento de banco de dados utilizado para a criação e manipulação do banco de dados.
-- **SQL**: Linguagem usada para definir, manipular e consultar os dados.
+1. **Git**: Ferramenta de controle de versão. Você pode baixar [aqui](https://git-scm.com/downloads).
+2. **Node.js**: Ambiente de execução para JavaScript no servidor. Instale a versão mais recente do Node.js [aqui](https://nodejs.org/).
+3. **MySQL**: Sistema de gerenciamento de banco de dados. Você pode baixar [aqui](https://dev.mysql.com/downloads/installer/).
+4. **VSCode**: Editor de código-fonte. Baixe [aqui](https://code.visualstudio.com/).
 
 ## Como Testar o Banco de Dados
 
-### Pré-requisitos
+### 1. **Clone o Repositório**
 
-Antes de começar, você precisa ter o MySQL instalado em sua máquina. Se ainda não o instalou, siga as instruções de instalação do MySQL para o seu sistema operacional:
+Primeiro, clone o repositório para sua máquina local:
 
-- [Instalar MySQL no Windows](https://dev.mysql.com/doc/refman/8.0/en/installing.html)
-- [Instalar MySQL no macOS](https://dev.mysql.com/doc/refman/8.0/en/osx-installation.html)
-- [Instalar MySQL no Linux](https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html)
+```bash
+git clone https://github.com/GuilhermeCanina/feedbacks.git
+cd feedbacks
+```
 
-### Passo a Passo
+###2. Instale as Dependências
 
-1. **Clone ou crie o banco de dados:**
+Se você estiver configurando o backend com Node.js, vá para o diretório do projeto no terminal e instale as dependências com o seguinte comando:
 
-   Se você tem o arquivo SQL que contém a definição do banco, basta executá-lo no seu cliente MySQL. Caso contrário, execute os comandos abaixo:
+```bash
+npm install
+```
 
-   1. Abra o terminal do MySQL ou uma interface de gerenciamento de banco de dados como o **phpMyAdmin**.
-   2. Crie o banco de dados com o comando:
+Isso vai instalar todos os pacotes necessários listados no package.json.
 
-      ```sql
-      CREATE DATABASE feedbacks;
-      USE feedbacks;
-      ```
+###3. Crie o Banco de Dados
 
-2. **Crie a Tabela:**
+Abra o terminal MySQL e execute o seguinte comando para criar o banco de dados:
 
-   Execute o seguinte código SQL para criar a tabela `feedbacks`:
+```sql
+CREATE DATABASE feedbacks;
+USE feedbacks;
 
-   ```sql
-   CREATE TABLE feedbacks(
-       feedback_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-       data DATE NOT NULL,
-       nome VARCHAR(100) NOT NULL,
-       email VARCHAR(100) NOT NULL,
-       feedback VARCHAR(255) NOT NULL
-   );
+CREATE TABLE feedbacks(
+    feedback_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    data DATE NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    feedback VARCHAR(255) NOT NULL
+);
+```
+
+###6. Executar o Backend
+```bash
+npm start
+```
+
+O servidor ficará rodando localmente (geralmente em http://localhost:4000).
+
+
+Se o projeto tiver um servidor Node.js com Express, você pode iniciar o servidor com o seguinte comando:
