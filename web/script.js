@@ -1,57 +1,64 @@
-fetch('http://localhost:4000/feedback')
-.then(response => response.json())
-.then(feedbacks => {
-    console.log(feedbacks);
-    const tabela = document.getElementById('feedback');
+const cadastro = document.getElementById('cadastro');
+cadastro.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const dataValor = cadastro.data.value;
+    const data = new Date(dataValor);
     
-    feedbacks.forEach(feedback => {
-        console.log(feedback);
-        const linha = document.createElement('tr');
-        const data = feedback.data.split("T")[0];
-        const [ano, mes, dia] = data.split('-');
-        const dataFormatada = `${dia}/${mes}/${ano}`;
+    const dataFormatada = data.toLocaleDateString('pt-BR');
+    const corpo = {
+        data: dataFormatada,
+        nome: cadastro.nome.value,
+        email: cadastro.email.value,
+        feedback: cadastro.feedback.value
+    };
 
-        // Criação da linha e adição do botão de delete
-        linha.innerHTML = `
-            <td>${feedback.feedback_id}</td>
+    fetch('http://localhost:4000/feedback', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(corpo)
+    })
+        .then(response => response.status)
+        .then(status => {
+            if (status === 201) {
+                alert('Feedback cadastrado com sucesso');
+                window.location.reload();
+            } else {
+                alert('Erro ao cadastrar feedback');
+            }
+        });
+});
+
+fetch('http://localhost:4000/feedback')
+    .then(response => response.json())
+    .then(feedback => {
+        const tabela = document.getElementById('feedback');
+        feedback.forEach((feedback) => {
+            const linha = document.createElement('tr');
+            const dataFormatada = new Date(feedback.data).toLocaleDateString('pt-BR');
+            linha.innerHTML = `
             <td>${dataFormatada}</td>
             <td>${feedback.nome}</td>
             <td>${feedback.email}</td>
             <td>${feedback.feedback}</td>
-            <td><button class="delete-btn" data-id="${feedback.feedback_id}">Deletar</button></td>
+            <td><button onclick="excluir(${feedback.feedback_id})">Deletar</button></td>
         `;
-        
-        // Adiciona a linha na tabela
-        tabela.querySelector('tbody').appendChild(linha);
-    });
-
-    // Agora, adiciona o evento de clique aos botões de delete
-    const deleteButtons = document.querySelectorAll('.delete-btn');
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const feedbackId = event.target.getAttribute('data-id');
-            deletarFeedback(feedbackId); // Passa o ID correto para deletar
+            tabela.appendChild(linha);
         });
     });
 
-})
-.catch(error => console.error('Erro ao buscar feedbacks:', error));
-
-// Função para deletar feedback
-function deletarFeedback(id) {
-    fetch(`http://localhost:4000/feedback/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
+function excluir(feedback_id) {
+    fetch(`http://localhost:4000/feedback/${feedback_id}`, {
+        method: 'DELETE'
     })
-    .then(response => {
-        if (response.status === 200) {
-            alert('Feedback deletado com sucesso');
-            window.location.reload(); // Recarrega a página após o delete
-        } else {
-            alert('Erro ao deletar feedback');
-        }
-    })
-    .catch(error => console.error('Erro ao deletar feedback:', error));
+        .then(response => response.status)
+        .then(status => {
+            if (status === 204) {
+                alert('Erro ao excluir feedback');
+            } else {
+                alert('Feedback excluído com sucesso');
+                window.location.reload();
+            }
+        });
 }
