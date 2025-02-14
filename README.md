@@ -2,6 +2,8 @@
 
 Este projeto é um banco de dados simples para armazenar feedbacks de usuários. Ele foi criado para registrar informações de feedbacks recebidos, incluindo dados como nome, e-mail, data e o conteúdo do feedback.
 
+![Image](https://github.com/user-attachments/assets/b215a4f6-aabe-4374-8302-5059d6a4fd60)
+
 ## Tecnologias Usadas
 
 ### Frontend:
