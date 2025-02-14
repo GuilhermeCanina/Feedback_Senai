@@ -2,10 +2,10 @@ const con = require('../connect/banco');
 const express = require('express');
 
 const create = (req, res) => {
-    const { nome, email, feedback } = req.body;
+    const { data, nome, email, feedback } = req.body;
 
-    let query = `INSERT INTO feedbacks (nome, email, feedback, data) VALUES`;
-    query += `('${nome}', '${email}', '${feedback}', CURDATE())`;  // Adicionando a data atual com CURDATE()
+    let query = `INSERT INTO feedbacks (data, nome, email, feedback) VALUES`;
+    query += `('${data}','${nome}', '${email}', '${feedback}')`; 
     con.query(query, (err, result) => {
         if (err) {
             res.status(500).json(err);
